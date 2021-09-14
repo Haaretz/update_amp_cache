@@ -50,3 +50,7 @@ def updateCache(url):
         else:
             print("Update cache Success on {}!\n\t{}".format(k,url))    
 
+
+if __name__ == '__main__':
+    if len(sys.argv) == 2:
+        updateCache(sys.argv[1])
