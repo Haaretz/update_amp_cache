@@ -21,7 +21,7 @@ https://example.com/.well-known/amphtml/apikey.pub
 ### Flask  
 
 ```bash
-curl localhost:5000/update-cache -XPOST -d '{"url":"https://www.haaretz.com/amp/israel-news/podcasts/PODCAST-listen-when-will-saudi-arabia-also-make-peace-with-israel-1.10208557"}'
+curl -XPOST localhost:5000/update-cache -H "Content-Type: application/json" -d '{"url":"https://www.haaretz.com/amp/israel-news/podcasts/PODCAST-listen-when-will-saudi-arabia-also-make-peace-with-israel-1.10208557"}'
 ```
 
 ### CLI

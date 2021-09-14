@@ -28,6 +28,7 @@ def get_flush_url(updateCacheApiDomainSuffix,url):
 
 def get_updateCacheApiDomainSuffix(url=update_cache_url):
     r = requests.get(url)
+    r.close()
     updateCacheApiDomainSuffix = {}
     if r.status_code != 200:
         sys.exit("ERROR: unable to get updateCacheApiDomainSuffix from utl: " + url)
@@ -45,6 +46,7 @@ def updateCache(url):
             continue
         update_cache_url = get_flush_url(v,url)
         r = requests.get(update_cache_url)
+        r.close()
         if r.status_code != 200:
             print("Error: status code {} when purging cache on {} \n\turl: {}\n\t{}".format(r.status_code,k ,update_cache_url,r.txt))
         else:
