@@ -38,14 +38,12 @@ def get_updateCacheApiDomainSuffix(url=update_cache_url):
     return updateCacheApiDomainSuffix     
     
     
-def updateCache(url):
-    global update_cache_url
-    updateCacheApiDomainSuffix = get_updateCacheApiDomainSuffix(update_cache_url)
-    for k,v in updateCacheApiDomainSuffix.items():
+def updateCache(url,updateCacheApiDomains):
+    for k,v in updateCacheApiDomains.items():
         if k == "bing":
             continue
-        update_cache_url = get_flush_url(v,url)
-        r = requests.get(update_cache_url)
+        cache_url = get_flush_url(v,url)
+        r = requests.get(cache_url)
         r.close()
         if r.status_code != 200:
             print("Error: status code {} when purging cache on {} \n\turl: {}\n\t{}".format(r.status_code,k ,update_cache_url,r.txt))
@@ -55,4 +53,5 @@ def updateCache(url):
 
 if __name__ == '__main__':
     if len(sys.argv) == 2:
-        updateCache(sys.argv[1])
+        updateCacheApiDomains = get_updateCacheApiDomainSuffix(update_cache_url)
+        updateCache(sys.argv[1],updateCacheApiDomains)
